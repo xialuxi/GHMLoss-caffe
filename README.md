@@ -14,16 +14,27 @@
         }
         
    （3）、使用：    layer {
+   
                     name: "ghmcloss"
+                    
                     type: "GhmcLoss"
+                    
                     bottom: "fc6"
+                    
                     bottom: "label"
+                    
                     top: "ghmcloss"
+                    
                     loss_weight: 1
+                    
                     ghmc_loss_param {
+                    
                     m: 30
+                    
                     alpha: 0.2
+                    
                      }
+                     
                   }
 
 
