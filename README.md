@@ -41,4 +41,4 @@
 2、参考论文：https://arxiv.org/abs/1811.05181
 
 
-3、参考代码：https://github.com/libuyu/GHM_Detection
+3、pytorch参考代码：https://github.com/libuyu/GHM_Detection
