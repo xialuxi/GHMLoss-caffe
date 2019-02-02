@@ -17,7 +17,7 @@ namespace caffe {
     const GhmrLossParameter& param = this->layer_param_.ghmr_loss_param();
     m_ = param.m();
     alpha = param.alpha();
-    mu = param.alpha();
+    mu = param.mu();
     LOG(INFO) << "m: " << m_;
     CHECK_GT(m_, 0) << "m must be larger than zero";
     CHECK_GE(alpha, 0) << "alpha must be >= 0";
