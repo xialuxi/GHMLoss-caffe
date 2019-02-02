@@ -31,7 +31,7 @@ namespace caffe {
   template <typename Dtype>
   void GhmrLossLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
                                                     const vector<Blob<Dtype>*>& top) {
-
+    LossLayer<Dtype>::Reshape(bottom, top);
     //ghmr layer
     diff_asl.ReshapeLike(*bottom[0]);
     beta.ReshapeLike(*bottom[0]);
@@ -61,6 +61,7 @@ void GhmrLossLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     caffe_sub(count, bottom[0]->cpu_data(), label_data, distance_data);
     caffe_powx(count, distance_data, Dtype(2), asl_diff_data);
     caffe_add_scalar(count, mu_2, asl_diff_data);
+    caffe_sqrt(count, asl_diff_data, asl_diff_data);
     caffe_set(count, Dtype(-mu), loss_value_data);
     caffe_add(count, loss_value_data, asl_diff_data, loss_value_data);
     caffe_div(count, distance_data, asl_diff_data, asl_diff_data);
