@@ -61,7 +61,8 @@ void GhmrLossLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     caffe_sub(count, bottom[0]->cpu_data(), label_data, distance_data);
     caffe_powx(count, distance_data, Dtype(2), asl_diff_data);
     caffe_add_scalar(count, mu_2, asl_diff_data);
-    caffe_sqrt(count, asl_diff_data, asl_diff_data);
+    //caffe_sqrt(count, asl_diff_data, asl_diff_data);
+    caffe_powx(count, asl_diff_data, Dtype(0.5), asl_diff_data);
     caffe_set(count, Dtype(-mu), loss_value_data);
     caffe_add(count, loss_value_data, asl_diff_data, loss_value_data);
     caffe_div(count, distance_data, asl_diff_data, asl_diff_data);
@@ -76,7 +77,7 @@ void GhmrLossLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
             float min_g = i * epsin;
             float max_g = (i + 1) * epsin;
             float abs_value = fabs(asl_diff_data[k]);
-            if( abs_value < max_g && min_g >= min_g) {
+            if( abs_value < max_g && abs_value >= min_g) {
                 num_in_bin[i] += 1;
                 //record the index of r_num
                 beta_data[k] = i;
