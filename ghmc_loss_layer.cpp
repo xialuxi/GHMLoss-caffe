@@ -170,7 +170,7 @@ void GhmcLossLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
             // Don't calculate ignore label
             if( beta_data[k] >= 0) {
                 float abs_value = fabs(ce_diff_data[k]);
-                if( abs_value < max_g && min_g >= min_g) {
+                if( abs_value < max_g && abs_value >= min_g) {
                     num_in_bin[i] += 1;
                     //record the index of r_num
                     beta_data[k] = i;
